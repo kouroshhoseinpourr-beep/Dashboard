@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>گزارش عملکرد سفیران — الوپیک و الوپیک پلاس</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f0f4fb;
+      --panel: #ffffff;
+      --panel-2: #f7f9fd;
+      --panel-3: #edf0f7;
+      --border: #dde2ee;
+      --border-soft: #e8ecf5;
+      --text: #1a2035;
+      --text-dim: #5a6480;
+      --text-faint: #9aa3bb;
+
+      --blue: #0099ff;
+      --blue-deep: #0099ff;
+      --blue-glow: rgba(37, 99, 235, .12);
+      --blue-line: rgba(37, 99, 235, .35);
+
+      --yellow: #ffb510;
+      --yellow-deep: #ffb510;
+      --yellow-glow: rgba(251, 191, 36, .13);
+      --yellow-line: rgba(251, 191, 36, .45);
+
+      --purple: #7c3aed;
+      --purple-glow: rgba(124, 58, 237, .10);
+      --green: #059669;
+      --green-glow: rgba(5, 150, 105, .10);
+      --red: #dc2626;
+
+      --r-sm: 8px;
+      --r-md: 14px;
+      --r-lg: 20px;
+      --sans: 'Vazirmatn', sans-serif;
+
+      --pin-bg: #eff6ff;
+      --pin-border: #bfdbfe;
+      --pin-text: #1e40af;
+
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, .06);
+      --shadow-md: 0 4px 20px rgba(0, 0, 0, .09);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, .12);
+
+      --header-h: 88px;
+      --header-h-compact: 64px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background:
+        radial-gradient(ellipse at 5% -5%, rgba(37, 99, 235, .08), transparent 45%),
+        radial-gradient(ellipse at 97% 3%, rgba(251, 191, 36, .10), transparent 40%),
+        radial-gradient(ellipse at 50% 100%, rgba(124, 58, 237, .04), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      direction: rtl;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ══════════════════════════════════════
+       STICKY HEADER
+    ══════════════════════════════════════ */
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      width: 100%;
+      animation: headerSlideDown .55s cubic-bezier(.22, 1, .36, 1) both;
+    }
+
+    @keyframes headerSlideDown {
+      from {
+        transform: translateY(-110%);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .sticky-header-inner {
+      background: rgba(240, 244, 251, 0.72);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1.5px solid rgba(221, 226, 238, 0.6);
+      transition: box-shadow .35s cubic-bezier(.4, 0, .2, 1),
+        background .35s ease,
+        border-color .35s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sticky-header-inner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg,
+          transparent 0%, var(--blue) 30%, var(--blue-deep) 50%, var(--blue) 70%, transparent 100%);
+      background-size: 200% 100%;
+      animation: shimmerLine 3s ease-in-out infinite;
+    }
+
+    .theme-plus .sticky-header-inner::before {
+      background: linear-gradient(90deg,
+          transparent 0%, var(--yellow) 30%, var(--yellow-deep) 50%, var(--yellow) 70%, transparent 100%);
+      background-size: 200% 100%;
+    }
+
+    @keyframes shimmerLine {
+      0% {
+        background-position: 200% 0;
+      }
+
+      100% {
+        background-position: -200% 0;
+      }
+    }
+
+    .sticky-header.scrolled .sticky-header-inner {
+      background: rgba(240, 244, 251, 0.95);
+      box-shadow: 0 4px 24px rgba(37, 99, 235, .10), 0 1px 0 rgba(255, 255, 255, .8) inset;
+      border-bottom-color: rgba(221, 226, 238, 0.9);
+    }
+
+    .theme-plus .sticky-header.scrolled .sticky-header-inner {
+      box-shadow: 0 4px 24px rgba(251, 191, 36, .14), 0 1px 0 rgba(255, 255, 255, .8) inset;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      height: var(--header-h);
+      transition: height .35s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .scrolled .header-content {
+      height: var(--header-h-compact);
+    }
+
+    .header-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .header-eyebrow {
+      font-size: 12px;
+      letter-spacing: .06em;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      overflow: hidden;
+      max-height: 22px;
+      opacity: 1;
+      transition: max-height .35s cubic-bezier(.4, 0, .2, 1), opacity .25s ease, margin .35s ease;
+    }
+
+    .scrolled .header-eyebrow {
+      max-height: 0;
+      opacity: 0;
+      margin-bottom: -4px;
+    }
+
+    .header-eyebrow .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, .2);
+      flex-shrink: 0;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 3px rgba(5, 150, 105, .2);
+      }
+
+      50% {
+        box-shadow: 0 0 0 7px rgba(5, 150, 105, .06);
+      }
+    }
+
+    .header-title {
+      font-size: 26px;
+      font-weight: 900;
+      margin: 0;
+      letter-spacing: -.025em;
+      line-height: 1.1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: font-size .35s cubic-bezier(.4, 0, .2, 1), color .35s ease;
+    }
+
+    /* ── تایتل داینامیک ── */
+    .theme-alo .header-title {
+      color: var(--text-dim);
+    }
+
+    .theme-plus .header-title {
+      color: var(--text-dim);
+    }
+
+    .scrolled .header-title {
+      font-size: 20px;
+    }
+
+    /* ── switch ── */
+    .switch {
+      display: flex;
+      background: var(--panel-2);
+      border: 2px solid var(--border);
+      border-radius: 999px;
+      padding: 5px;
+      gap: 4px;
+      position: relative;
+      width: max-content;
+      box-shadow: var(--shadow-sm);
+      flex-shrink: 0;
+      transition: transform .35s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .scrolled .switch {
+      transform: scale(0.9);
+    }
+
+    .switch button {
+      position: relative;
+      z-index: 2;
+      border: none;
+      background: none;
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: 15px;
+      padding: 11px 28px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: color .3s ease;
+      white-space: nowrap;
+    }
+
+    /* دکمه‌های غیرفعال */
+    .switch button:not(.active) {
+      color: var(--text-dim);
+    }
+
+    /* دکمه الوپیک پلاس وقتی سوییچ روی پلاسه → سفید */
+    .switch.is-plus #btnPlus:not(.active) {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    /* دکمه الوپیک وقتی سوییچ روی الوپیکه → سفید */
+    .switch:not(.is-plus) #btnAlo:not(.active) {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .switch button.active {
+      color: #fff;
+    }
+
+    /* دکمه الوپیک پلاس غیرفعال (وقتی الوپیک انتخابه) */
+    .switch:not(.is-plus) #btnPlus {
+      color: var(--text-dim);
+    }
+
+    .switch.pill {
+      position: absolute;
+      top: 5px;
+      bottom: 5px;
+      right: 5px;
+      width: calc(50% - 5px);
+      border-radius: 999px;
+      z-index: 1;
+      background: linear-gradient(135deg, var(--blue), var(--blue-deep));
+      transition: transform .38s cubic-bezier(.65, 0, .35, 1), background .35s ease;
+      box-shadow: 0 4px 18px -2px rgba(37, 99, 235, .45);
+    }
+
+    .switch .pill {
+      position: absolute;
+      top: 5px;
+      bottom: 5px;
+      right: 5px;
+      width: calc(50% - 5px);
+      border-radius: 999px;
+      z-index: 1;
+      background: linear-gradient(135deg, var(--blue), var(--blue-deep));
+      transition: transform .38s cubic-bezier(.65, 0, .35, 1), background .35s ease;
+      box-shadow: 0 4px 18px -2px rgba(37, 99, 235, .45);
+    }
+
+    .switch.is-plus .pill {
+      transform: translateX(-100%);
+      background: linear-gradient(135deg, var(--yellow), var(--yellow-deep));
+      box-shadow: 0 4px 18px -2px rgba(251, 191, 36, .50);
+    }
+
+    /* ══════════════════════════════════════
+       LAYOUT
+    ══════════════════════════════════════ */
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 28px 24px 100px;
+    }
+
+    .subnav {
+      display: flex;
+      gap: 10px;
+      margin: 0 0 24px;
+      flex-wrap: wrap;
+    }
+
+    .subnav button {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: 16px;
+      color: var(--text-dim);
+      background: var(--panel);
+      border: 2px solid var(--border);
+      padding: 13px 26px;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all .22s cubic-bezier(.4, 0, .2, 1);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .subnav button:hover {
+      color: var(--text);
+      border-color: var(--blue-line);
+      background: var(--blue-glow);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .subnav button.active {
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .15);
+      transform: translateY(-1px);
+    }
+
+    .theme-alo .subnav button.active {
+      background: linear-gradient(135deg, var(--blue), var(--blue-deep));
+    }
+
+    .theme-plus .subnav button.active {
+      background: linear-gradient(135deg, var(--yellow), var(--yellow-deep));
+      color: #fff;
+    }
+
+    /* ── panels ── */
+    .panel {
+      background: var(--panel);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow .25s ease;
+    }
+
+    .panel:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .panel+.panel {
+      margin-top: 18px;
+    }
+
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+
+    .panel-head h3 {
+      font-size: 22px;
+      margin: 0 0 6px;
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: -.02em;
+    }
+
+    .panel-head p {
+      margin: 0;
+      font-size: 15px;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    .tag {
+      font-size: 13px;
+      padding: 6px 14px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border);
+      color: var(--text-dim);
+      white-space: nowrap;
+      background: var(--panel-2);
+      font-weight: 700;
+    }
+
+    /* ── table ── */
+    .tbl-scroll {
+      overflow-x: auto;
+      border-radius: var(--r-md);
+      border: 1.5px solid var(--border-soft);
+    }
+
+    table.data {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+      min-width: 480px;
+    }
+
+    table.data th {
+      font-family: var(--sans);
+      font-weight: 800;
+      color: var(--text-dim);
+      font-size: 14px;
+      text-align: right;
+      padding: 16px 18px;
+      background: var(--panel-2);
+      border-bottom: 2px solid var(--border);
+      position: sticky;
+      top: 0;
+      white-space: nowrap;
+    }
+
+    table.data td {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-soft);
+      font-family: var(--sans);
+      font-size: 15px;
+      white-space: nowrap;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    table.data td.city {
+      font-weight: 800;
+      font-size: 16px;
+    }
+
+    table.data tbody tr {
+      transition: background .15s ease;
+    }
+
+    table.data tbody tr:hover {
+      background: var(--panel-2);
+    }
+
+    table.data tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    table.data tbody tr.pinned-row {
+      background: var(--pin-bg) !important;
+    }
+
+    table.data tbody tr.pinned-row td {
+      border-bottom: 1px solid var(--pin-border);
+    }
+
+    table.data tbody tr.pinned-row td.city {
+      color: var(--pin-text);
+      font-weight: 900;
+    }
+
+    table.data tbody tr.pinned-row td.city::after {
+      content: " ★";
+      font-size: 12px;
+      color: var(--blue);
+      opacity: .8;
+    }
+
+    .theme-plus table.data tbody tr.pinned-row {
+      background: #fffbeb !important;
+    }
+
+    .theme-plus table.data tbody tr.pinned-row td {
+      border-bottom-color: #fde68a;
+    }
+
+    .theme-plus table.data tbody tr.pinned-row td.city {
+      color: #78350f;
+    }
+
+    .theme-plus table.data tbody tr.pinned-row td.city::after {
+      color: var(--yellow-deep);
+    }
+
+    .biker-card.pinned {
+      border: 2px solid var(--pin-border);
+      background: var(--pin-bg);
+    }
+
+    .theme-plus .biker-card.pinned {
+      border-color: #fcd34d;
+      background: #fffbeb;
+    }
+
+    .dash {
+      color: var(--text-faint);
+    }
+
+    .num-pos {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .num-neg {
+      color: var(--red);
+      font-weight: 700;
+    }
+
+    /* ── biker cards ── */
+    .biker-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 14px;
+    }
+
+    .biker-card {
+      background: var(--panel-2);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 20px;
+      transition: all .25s cubic-bezier(.4, 0, .2, 1);
+      animation: slideUp .4s ease both;
+    }
+
+    .biker-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
+      border-color: var(--blue-line);
+    }
+
+    .theme-plus .biker-card:hover {
+      border-color: var(--yellow-line);
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .biker-card:nth-child(1) {
+      animation-delay: .05s
+    }
+
+    .biker-card:nth-child(2) {
+      animation-delay: .10s
+    }
+
+    .biker-card:nth-child(3) {
+      animation-delay: .15s
+    }
+
+    .biker-card:nth-child(4) {
+      animation-delay: .20s
+    }
+
+    .biker-card:nth-child(5) {
+      animation-delay: .25s
+    }
+
+    .biker-card:nth-child(6) {
+      animation-delay: .30s
+    }
+
+    .biker-card .city {
+      font-weight: 900;
+      font-size: 18px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text);
+      padding-bottom: 12px;
+      border-bottom: 1.5px solid var(--border-soft);
+    }
+
+    .biker-card .metric {
+      margin-bottom: 14px;
+    }
+
+    .biker-card .metric:last-child {
+      margin-bottom: 0;
+    }
+
+    .metric-label {
+      font-size: 14px;
+      color: var(--text-dim);
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 7px;
+      font-weight: 700;
+      align-items: center;
+    }
+
+    .metric-label .delta {
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .bar-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bar-track {
+      flex: 1;
+      height: 8px;
+      border-radius: 6px;
+      background: var(--panel-3);
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 6px;
+      transition: width .6s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .bar-fill.now {
+      background: linear-gradient(90deg, var(--blue), var(--blue-deep));
+    }
+
+    .bar-fill.prev {
+      background: var(--text-faint);
+      opacity: .35;
+    }
+
+    .theme-plus .bar-fill.now {
+      background: linear-gradient(90deg, var(--yellow), var(--yellow-deep));
+    }
+
+    .bar-val {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-dim);
+      width: 76px;
+      text-align: left;
+      flex-shrink: 0;
+    }
+
+    .legend-row {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: 20px;
+      font-size: 14px;
+      color: var(--text-dim);
+      font-weight: 700;
+      padding: 12px 16px;
+      background: var(--panel-2);
+      border-radius: 10px;
+      border: 1.5px solid var(--border-soft);
+    }
+
+    .legend-row .sw {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-left: 6px;
+    }
+
+    /* ── datebar & accordion ── */
+    .datebar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .datebtn {
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text-dim);
+      background: var(--panel-2);
+      border: 2px solid var(--border);
+      padding: 12px 24px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all .22s ease;
+    }
+
+    .datebtn:hover {
+      color: var(--text);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .datebtn.active {
+      color: #fff;
+      border-color: transparent;
+      transform: translateY(-1px);
+    }
+
+    .theme-alo .datebtn.active {
+      background: var(--blue);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, .35);
+    }
+
+    .theme-plus .datebtn.active {
+      background: var(--yellow);
+      box-shadow: 0 4px 12px rgba(251, 191, 36, .40);
+      color: #78350f;
+    }
+
+    .accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .acc-item {
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      background: var(--panel-2);
+      transition: box-shadow .25s ease, border-color .25s ease;
+    }
+
+    .acc-item:hover {
+      box-shadow: var(--shadow-sm);
+    }
+
+    .acc-item.open {
+      border-color: var(--blue-line);
+      box-shadow: var(--shadow-md);
+    }
+
+    .theme-plus .acc-item.open {
+      border-color: var(--yellow-line);
+    }
+
+    .acc-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 22px;
+      cursor: pointer;
+      user-select: none;
+      transition: background .18s ease;
+    }
+
+    .acc-head:hover {
+      background: var(--panel-3);
+    }
+
+    .acc-head .left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .seg-chip {
+      font-size: 13px;
+      font-weight: 800;
+      padding: 6px 14px;
+      border-radius: 8px;
+    }
+
+    .acc-head .gloss {
+      font-size: 15px;
+      color: var(--text-dim);
+      font-weight: 700;
+    }
+
+    .acc-head .meta {
+      font-size: 14px;
+      color: var(--text-faint);
+      font-weight: 600;
+    }
+
+    .acc-head .chev {
+      transition: transform .3s cubic-bezier(.4, 0, .2, 1);
+      color: var(--text-faint);
+      font-size: 18px;
+    }
+
+    .acc-item.open .chev {
+      transform: rotate(180deg);
+    }
+
+    .acc-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .38s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .acc-body-inner {
+      padding: 0 22px 20px;
+    }
+
+    .seg-dormant {
+      background: rgba(37, 99, 235, .12);
+      color: #1d4ed8;
+    }
+
+    .seg-churn {
+      background: rgba(251, 191, 36, .15);
+      color: #92400e;
+    }
+
+    .seg-deactive {
+      background: rgba(220, 38, 38, .12);
+      color: #b91c1c;
+    }
+
+    .seg-recency {
+      background: rgba(5, 150, 105, .12);
+      color: #047857;
+    }
+
+    /* ── acttype ── */
+    .acttype {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .acttype button {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+      border: 2px solid var(--border);
+      background: var(--panel-2);
+      border-radius: var(--r-md);
+      padding: 18px 22px;
+      cursor: pointer;
+      transition: all .25s cubic-bezier(.4, 0, .2, 1);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .acttype button .t1 {
+      font-weight: 900;
+      font-size: 18px;
+      color: var(--text);
+    }
+
+    .acttype button .t2 {
+      font-size: 14px;
+      color: var(--text-dim);
+      font-weight: 600;
+    }
+
+    .acttype button:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .acttype button.active.daily {
+      border-color: rgba(124, 58, 237, .5);
+      background: var(--purple-glow);
+      box-shadow: 0 4px 16px rgba(124, 58, 237, .15);
+    }
+
+    .acttype button.active.timeslot {
+      border-color: rgba(5, 150, 105, .5);
+      background: var(--green-glow);
+      box-shadow: 0 4px 16px rgba(5, 150, 105, .15);
+    }
+
+    .split-tables {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media(max-width:760px) {
+      .split-tables {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .split-head {
+      font-size: 15px;
+      font-weight: 900;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .split-head .sw {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .empty-state {
+      border: 2px dashed var(--border);
+      border-radius: var(--r-md);
+      padding: 36px 16px;
+      text-align: center;
+      color: var(--text-faint);
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    /* ── growth cards ── */
+    .growth-summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+      margin-bottom: 6px;
+    }
+
+    .growth-card {
+      background: var(--panel-2);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 22px 18px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      position: relative;
+      overflow: hidden;
+      transition: all .28s cubic-bezier(.4, 0, .2, 1);
+      animation: slideUp .45s ease both;
+    }
+
+    .growth-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-4px);
+    }
+
+    .growth-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--blue), var(--blue-deep));
+      border-radius: 3px 3px 0 0;
+    }
+
+    .theme-plus .growth-card::before {
+      background: linear-gradient(90deg, var(--yellow), var(--yellow-deep));
+    }
+
+    .growth-card::after {
+      content: '';
+      position: absolute;
+      bottom: -30px;
+      right: -20px;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--blue-deep));
+      opacity: .04;
+    }
+
+    .theme-plus .growth-card::after {
+      background: linear-gradient(135deg, var(--yellow), var(--yellow-deep));
+    }
+
+    .growth-icon {
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
+
+    .growth-label {
+      font-size: 14px;
+      color: var(--text-dim);
+      font-weight: 800;
+    }
+
+    .growth-delta {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 15px;
+      font-weight: 800;
+      padding: 5px 12px;
+      border-radius: 20px;
+      width: fit-content;
+      margin-bottom: 2px;
+    }
+
+    .growth-delta.pos {
+      background: rgba(5, 150, 105, .12);
+      color: #047857;
+    }
+
+    .growth-delta.neg {
+      background: rgba(220, 38, 38, .10);
+      color: #b91c1c;
+    }
+
+    .growth-arrow {
+      font-size: 12px;
+    }
+
+    .growth-now {
+      font-size: 30px;
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1.1;
+      margin: 2px 0 4px;
+      letter-spacing: -.02em;
+    }
+
+    .growth-prev {
+      font-size: 13px;
+      color: var(--text-faint);
+      font-weight: 600;
+    }
+
+    .fade-in {
+      animation: fadeIn .4s cubic-bezier(.4, 0, .2, 1) both;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ══════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════ */
+    footer.foot {
+      margin-top: 56px;
+      padding: 24px 32px;
+      background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #1d4ed8 100%);
+      border-radius: var(--r-lg);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      box-shadow: 0 8px 32px rgba(37, 99, 235, .3);
+      position: relative;
+      overflow: hidden;
+      transition: background .4s ease, box-shadow .4s ease;
+    }
+
+    footer.foot::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      left: -40px;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .06);
+    }
+
+    footer.foot::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      right: -20px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .04);
+    }
+
+    .theme-plus footer.foot {
+      background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #fcd34d 100%);
+      box-shadow: 0 8px 32px rgba(251, 191, 36, .45);
+    }
+
+    .foot-brand {
+      font-weight: 900;
+      font-size: 17px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .foot-brand .badge {
+      background: rgba(255, 255, 255, .25);
+      border: 1.5px solid rgba(255, 255, 255, .4);
+      border-radius: 8px;
+      padding: 4px 12px;
+      font-size: 13px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .foot-meta {
+      font-size: 14px;
+      color: rgba(255, 255, 255, .8);
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      position: relative;
+      z-index: 1;
+      font-weight: 600;
+    }
+
+    .foot-date {
+      background: rgba(255, 255, 255, .2);
+      border: 1.5px solid rgba(255, 255, 255, .35);
+      border-radius: 8px;
+      padding: 6px 16px;
+      font-weight: 800;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .theme-plus footer.foot .foot-brand {
+      color: #78350f;
+    }
+
+    .theme-plus footer.foot .foot-brand .badge {
+      background: rgba(120, 53, 15, .15);
+      border-color: rgba(120, 53, 15, .3);
+      color: #78350f;
+    }
+
+    .theme-plus footer.foot .foot-meta {
+      color: #92400e;
+    }
+
+    .theme-plus footer.foot .foot-date {
+      background: rgba(120, 53, 15, .12);
+      border-color: rgba(120, 53, 15, .25);
+      color: #78350f;
+    }
+
+    @media(max-width:600px) {
+      .header-title {
+        font-size: 20px;
+      }
+
+      .scrolled .header-title {
+        font-size: 16px;
+      }
+
+      .switch button {
+        padding: 10px 16px;
+        font-size: 14px;
+      }
+
+      .panel {
+        padding: 18px;
+      }
+
+      footer.foot {
+        padding: 18px 22px;
+      }
+
+      .growth-summary {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .growth-now {
+        font-size: 24px;
+      }
+
+      .acttype {
+        flex-direction: column;
+      }
+
+      .subnav button {
+        font-size: 14px;
+        padding: 11px 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app" class="theme-alo">
+
+    <header class="sticky-header" id="stickyHeader">
+      <div class="sticky-header-inner">
+        <div class="header-content">
+          <div class="header-left">
+            <div class="header-eyebrow">
+              <span class="dot"></span>
+              گزارش کمپین ۱۴۰۵/۰۳/۲۸
+            </div>
+            <h1 class="header-title">الوپیک &nbsp;/&nbsp; الوپیک پلاس</h1>
+          </div>
+          <div id="switchEl" class="switch">
+            <div class="pill"></div>
+            <button id="btnAlo" class="active">الوپیک</button>
+            <button id="btnPlus">الوپیک پلاس</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="wrap">
+      <div id="subnav" class="subnav"></div>
+      <div id="content"></div>
+
+      <footer class="foot">
+        <div class="foot-brand">
+          <span>Fleet Team</span>
+          <span class="badge">Alopeyk</span>
+        </div>
+        <div class="foot-meta">
+          <span>Developed By The Fleet Team</span>
+          <span class="foot-date">۱۴۰۵/۰۴/۰۸</span>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    /* ── scroll ── */
+    const stickyHeader = document.getElementById('stickyHeader');
+    let lastScroll = 0, ticking = false;
+    window.addEventListener('scroll', () => {
+      lastScroll = window.scrollY;
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          stickyHeader.classList.toggle('scrolled', lastScroll > 10);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    /* ════════════════════════════════════
+       DATA
+    ════════════════════════════════════ */
+    const DATA = {
+      "plus": {
+        "dup": [
+          { "city": "اردبیل", "c1": 5, "c2": 2, "c3": 15, "target": 109 },
+          { "city": "ارومیه", "c1": 487, "c2": 15, "c3": 20, "target": 163 },
+          { "city": "اصفهان", "c1": 1349, "c2": 183, "c3": 155, "target": 189 },
+          { "city": "اندیشه", "c1": 55, "c2": 0, "c3": 0, "target": 55 },
+          { "city": "اهواز", "c1": 2458, "c2": 227, "c3": 134, "target": 244 },
+          { "city": "تبریز", "c1": 1360, "c2": 28, "c3": 33, "target": 190 },
+          { "city": "تهران", "c1": 11568, "c2": 2498, "c3": 571, "target": 622 },
+          { "city": "خرم آباد", "c1": 72, "c2": 0, "c3": 0, "target": 55 },
+          { "city": "رشت", "c1": 424, "c2": 37, "c3": 22, "target": 55 },
+          { "city": "زاهدان", "c1": 47, "c2": 13, "c3": 15, "target": 28 },
+          { "city": "ساری", "c1": 37, "c2": 0, "c3": 0, "target": 109 },
+          { "city": "شیراز", "c1": 2639, "c2": 230, "c3": 107, "target": 271 },
+          { "city": "قزوین", "c1": 35, "c2": 0, "c3": 0, "target": 109 },
+          { "city": "قم", "c1": 48, "c2": 41, "c3": 57, "target": 136 },
+          { "city": "گرگان", "c1": 53, "c2": 0, "c3": 0, "target": 109 },
+          { "city": "مشهد", "c1": 3983, "c2": 826, "c3": 199, "target": 136 },
+          { "city": "همدان", "c1": 392, "c2": 14, "c3": 27, "target": 136 },
+          { "city": "کاشان", "c1": 274, "c2": 0, "c3": 0, "target": 28 },
+          { "city": "کرج", "c1": 2586, "c2": 253, "c3": 171, "target": 433 },
+          { "city": "کرمان", "c1": 437, "c2": 11, "c3": 21, "target": 28 },
+          { "city": "کرمانشاه", "c1": 392, "c2": 26, "c3": 49, "target": 82 },
+          { "city": "یزد", "c1": 495, "c2": 32, "c3": 35, "target": 28 }
+        ],
+        "bikers": [
+          { "city": "تهران", "d28_active": 1822, "d28_opb": 29, "d28_online": 9020, "d28_busy": 8056, "r523_active": 1555, "r523_opb": 16, "r523_online": 6414, "r523_busy": 5415 },
+          { "city": "مشهد", "d28_active": 638, "d28_opb": 35, "d28_online": 3048.75, "d28_busy": 2819.88, "r523_active": 422, "r523_opb": 16, "r523_online": 1546.9, "r523_busy": 1359.12 },
+          { "city": "اردبیل", "d28_active": 18, "d28_opb": 65, "d28_online": 172.42, "d28_busy": 149.98, "r523_active": 12, "r523_opb": 24, "r523_online": 105.91, "r523_busy": 56.27 },
+          { "city": "ارومیه", "d28_active": 21, "d28_opb": 60, "d28_online": 162.47, "d28_busy": 150.7, "r523_active": 16, "r523_opb": 19, "r523_online": 94.99, "r523_busy": 53.82 },
+          { "city": "اصفهان", "d28_active": 252, "d28_opb": 32, "d28_online": 1392.78, "d28_busy": 1149.8, "r523_active": 168, "r523_opb": 17, "r523_online": 770.8, "r523_busy": 587.32 },
+          { "city": "اندیشه", "d28_active": 24, "d28_opb": 55, "d28_online": 159.95, "d28_busy": 151.05, "r523_active": 18, "r523_opb": 27, "r523_online": 74.44, "r523_busy": 57.19 },
+          { "city": "اهواز", "d28_active": 221, "d28_opb": 50, "d28_online": 1229.67, "d28_busy": 1165.75, "r523_active": 175, "r523_opb": 23, "r523_online": 847.5, "r523_busy": 707.32 },
+          { "city": "تبریز", "d28_active": 66, "d28_opb": 35, "d28_online": 327.65, "d28_busy": 302.32, "r523_active": 47, "r523_opb": 14, "r523_online": 238.79, "r523_busy": 159.23 },
+          { "city": "خرم آباد", "d28_active": 34, "d28_opb": 54, "d28_online": 205.72, "d28_busy": 197.58, "r523_active": 26, "r523_opb": 22, "r523_online": 151.42, "r523_busy": 105.15 },
+          { "city": "رشت", "d28_active": 90, "d28_opb": 43, "d28_online": 453.4, "d28_busy": 431.28, "r523_active": 55, "r523_opb": 17, "r523_online": 230.96, "r523_busy": 185.35 },
+          { "city": "رفسنجان", "d28_active": 3, "d28_opb": 32, "d28_online": 21.92, "d28_busy": 10.85, "r523_active": 1, "r523_opb": 11, "r523_online": 12.9, "r523_busy": 5.42 },
+          { "city": "زاهدان", "d28_active": 33, "d28_opb": 54, "d28_online": 158.38, "d28_busy": 149.57, "r523_active": 20, "r523_opb": 20, "r523_online": 87.43, "r523_busy": 58.36 },
+          { "city": "ساری", "d28_active": 30, "d28_opb": 41, "d28_online": 164.68, "d28_busy": 148.93, "r523_active": 18, "r523_opb": 16, "r523_online": 92.76, "r523_busy": 59.24 },
+          { "city": "شیراز", "d28_active": 173, "d28_opb": 34, "d28_online": 831.48, "d28_busy": 762, "r523_active": 105, "r523_opb": 16, "r523_online": 535.07, "r523_busy": 439.91 },
+          { "city": "قزوین", "d28_active": 158, "d28_opb": 80, "d28_online": 181.3, "d28_busy": 169.52, "r523_active": 133, "r523_opb": 28, "r523_online": 126.7, "r523_busy": 83.05 },
+          { "city": "قم", "d28_active": 134, "d28_opb": 48, "d28_online": 954.78, "d28_busy": 886.32, "r523_active": 62, "r523_opb": 24, "r523_online": 519.25, "r523_busy": 426.74 },
+          { "city": "کاشان", "d28_active": 42, "d28_opb": 40, "d28_online": 218.78, "d28_busy": 204.37, "r523_active": 30, "r523_opb": 17, "r523_online": 126.51, "r523_busy": 102.21 },
+          { "city": "کرج", "d28_active": 291, "d28_opb": 31, "d28_online": 1549.33, "d28_busy": 1402.22, "r523_active": 210, "r523_opb": 15, "r523_online": 863.81, "r523_busy": 640.77 },
+          { "city": "کرمان", "d28_active": 25, "d28_opb": 24, "d28_online": 88.93, "d28_busy": 86.07, "r523_active": 21, "r523_opb": 13, "r523_online": 49.31, "r523_busy": 38.53 },
+          { "city": "کرمانشاه", "d28_active": 67, "d28_opb": 81, "d28_online": 653.42, "d28_busy": 612.37, "r523_active": 56, "r523_opb": 25, "r523_online": 403.7, "r523_busy": 305.23 },
+          { "city": "گرگان", "d28_active": 30, "d28_opb": 68, "d28_online": 209.43, "d28_busy": 198.6, "r523_active": 22, "r523_opb": 26, "r523_online": 130.64, "r523_busy": 91.31 },
+          { "city": "همدان", "d28_active": 58, "d28_opb": 66, "d28_online": 447.52, "d28_busy": 406.17, "r523_active": 34, "r523_opb": 27, "r523_online": 237.4, "r523_busy": 179.44 },
+          { "city": "یزد", "d28_active": 88, "d28_opb": 29, "d28_online": 392.65, "d28_busy": 364.32, "r523_active": 45, "r523_opb": 16, "r523_online": 163.96, "r523_busy": 131.24 }
+        ],
+        "react": {
+          "28": {
+            "Dormant 15-30": [
+              { "city": "ارومیه", "cohort": 24, "enroll": null, "cost": null, "cpa": null },
+              { "city": "اصفهان", "cohort": 157, "enroll": 9, "cost": 3470000, "cpa": 385555.56 },
+              { "city": "اهواز", "cohort": 193, "enroll": 7, "cost": 2760000, "cpa": 394285.71 },
+              { "city": "تبریز", "cohort": 37, "enroll": 1, "cost": 360000, "cpa": 360000 },
+              { "city": "تهران", "cohort": 660, "enroll": 44, "cost": 18610000, "cpa": 422954.55 },
+              { "city": "رشت", "cohort": 37, "enroll": 4, "cost": 1200000, "cpa": 300000 },
+              { "city": "زاهدان", "cohort": 15, "enroll": 1, "cost": 450000, "cpa": 450000 },
+              { "city": "شیراز", "cohort": 180, "enroll": 3, "cost": 970000, "cpa": 323333.33 },
+              { "city": "کاشان", "cohort": 27, "enroll": 2, "cost": 780000, "cpa": 390000 },
+              { "city": "کرج", "cohort": 195, "enroll": 11, "cost": 3650000, "cpa": 331818.18 },
+              { "city": "کرمان", "cohort": 38, "enroll": 2, "cost": 500000, "cpa": 250000 },
+              { "city": "کرمانشاه", "cohort": 17, "enroll": null, "cost": null, "cpa": null },
+              { "city": "مشهد", "cohort": 340, "enroll": 26, "cost": 8920000, "cpa": 343076.92 },
+              { "city": "همدان", "cohort": 11, "enroll": 2, "cost": 980000, "cpa": 490000 },
+              { "city": "یزد", "cohort": 47, "enroll": 3, "cost": 1200000, "cpa": 400000 }
+            ],
+            "Churn 30-60": [
+              { "city": "ارومیه", "cohort": 39, "enroll": null, "cost": 0, "cpa": null },
+              { "city": "اصفهان", "cohort": 381, "enroll": 13, "cost": 4610000, "cpa": 354615.38 },
+              { "city": "اهواز", "cohort": 459, "enroll": 5, "cost": 1340000, "cpa": 268000 },
+              { "city": "تبریز", "cohort": 78, "enroll": 3, "cost": 890000, "cpa": 296666.67 },
+              { "city": "تهران", "cohort": 1082, "enroll": 18, "cost": 10320000, "cpa": 573333.33 },
+              { "city": "رشت", "cohort": 61, "enroll": 4, "cost": 1500000, "cpa": 375000 },
+              { "city": "زاهدان", "cohort": 23, "enroll": 1, "cost": 0, "cpa": 0 },
+              { "city": "شیراز", "cohort": 581, "enroll": 11, "cost": 3610000, "cpa": 328181.82 },
+              { "city": "کاشان", "cohort": 36, "enroll": 1, "cost": 440000, "cpa": 440000 },
+              { "city": "کرج", "cohort": 584, "enroll": 15, "cost": 4930000, "cpa": 328666.67 },
+              { "city": "کرمان", "cohort": 57, "enroll": null, "cost": 0, "cpa": null },
+              { "city": "کرمانشاه", "cohort": 47, "enroll": null, "cost": 0, "cpa": null },
+              { "city": "مشهد", "cohort": 890, "enroll": 27, "cost": 9870000, "cpa": 365555.56 },
+              { "city": "همدان", "cohort": 70, "enroll": null, "cost": 0, "cpa": null },
+              { "city": "یزد", "cohort": 56, "enroll": 1, "cost": 400000, "cpa": 400000 }
+            ],
+            "Dead +60": [
+              { "city": "ارومیه", "cohort": 418, "enroll": 2, "cost": 290000, "cpa": 145000 },
+              { "city": "اصفهان", "cohort": 838, "enroll": 7, "cost": 2290000, "cpa": 327142.86 },
+              { "city": "اهواز", "cohort": 1893, "enroll": 4, "cost": 1840000, "cpa": 460000 },
+              { "city": "تبریز", "cohort": 1224, "enroll": 2, "cost": 530000, "cpa": 265000 },
+              { "city": "تهران", "cohort": 6566, "enroll": 27, "cost": 16140000, "cpa": 597777.78 },
+              { "city": "رشت", "cohort": 315, "enroll": 2, "cost": 520000, "cpa": 260000 },
+              { "city": "زاهدان", "cohort": null, "enroll": null, "cost": null, "cpa": null },
+              { "city": "شیراز", "cohort": 1995, "enroll": 3, "cost": 1140000, "cpa": 380000 },
+              { "city": "کاشان", "cohort": 150, "enroll": 1, "cost": 240000, "cpa": 240000 },
+              { "city": "کرج", "cohort": 1855, "enroll": 13, "cost": 4400000, "cpa": 338461.54 },
+              { "city": "کرمان", "cohort": 328, "enroll": 1, "cost": null, "cpa": null },
+              { "city": "کرمانشاه", "cohort": 320, "enroll": null, "cost": null, "cpa": null },
+              { "city": "مشهد", "cohort": 2901, "enroll": 24, "cost": 15530000, "cpa": 647083.33 },
+              { "city": "همدان", "cohort": 299, "enroll": 7, "cost": 2450000, "cpa": 350000 },
+              { "city": "یزد", "cohort": 357, "enroll": 3, "cost": 1040000, "cpa": 346666.67 }
+            ]
+          },
+          "31": {
+            "Dormant 15-30": [{ "city": "تهران", "cohort": 346, "enroll": 38, "cost": 12600000, "cpa": 331578.95 }],
+            "Churn 30-60": [{ "city": "تهران", "cohort": 1031, "enroll": 134, "cost": 61520000, "cpa": 459104.48 }],
+            "Dead +60": [{ "city": "تهران", "cohort": 8517, "enroll": 167, "cost": 96450000, "cpa": 577544.91 }]
+          }
+        },
+        "act": {
+          "daily": {
+            "date": "28",
+            "rows": [
+              { "city": "اندیشه", "cohort": 55, "enroll": 20, "winner": 17, "cost": 8540000, "roi": 0.2981 },
+              { "city": "خرم آباد", "cohort": 72, "enroll": 21, "winner": 16, "cost": 8050000, "roi": 0.2627 },
+              { "city": "ساری", "cohort": 37, "enroll": 17, "winner": 15, "cost": 4500000, "roi": 0.0494 },
+              { "city": "قزوین", "cohort": 35, "enroll": 16, "winner": 16, "cost": 8500000, "roi": 0.4059 },
+              { "city": "کاشان", "cohort": 61, "enroll": 33, "winner": 28, "cost": 9840000, "roi": 0.3625 },
+              { "city": "گرگان", "cohort": 53, "enroll": 22, "winner": 20, "cost": 10010000, "roi": 0.2699 }
+            ]
+          },
+          "timeslot": {
+            "28": {
+              "active": [
+                { "city": "اردبیل", "cohort": 41, "enroll": 30, "winner": 22, "cost": 7080000, "roi": 0.3378 },
+                { "city": "ارومیه", "cohort": 66, "enroll": 25, "winner": 20, "cost": 6580000, "roi": 0.1974 },
+                { "city": "اصفهان", "cohort": 692, "enroll": 327, "winner": 81, "cost": 24920000, "roi": 0.4413 },
+                { "city": "اهواز", "cohort": 644, "enroll": 269, "winner": 150, "cost": 61510000, "roi": 0.3858 },
+                { "city": "تبریز", "cohort": 141, "enroll": 74, "winner": 61, "cost": 11640000, "roi": 0.3542 },
+                { "city": "تهران", "cohort": 5533, "enroll": 1941, "winner": 925, "cost": 476360000, "roi": 0.2526 },
+                { "city": "رشت", "cohort": 131, "enroll": 98, "winner": 48, "cost": 18180000, "roi": 0.2365 },
+                { "city": "زاهدان", "cohort": 66, "enroll": 37, "winner": 10, "cost": 6400000, "roi": 0.2271 },
+                { "city": "شیراز", "cohort": 522, "enroll": 160, "winner": 71, "cost": 22170000, "roi": 0.3886 },
+                { "city": "قم", "cohort": 255, "enroll": 166, "winner": 75, "cost": 25050000, "roi": 0.4386 },
+                { "city": "کرج", "cohort": 794, "enroll": 312, "winner": 128, "cost": 34120000, "roi": 0.3450 },
+                { "city": "کرمان", "cohort": 64, "enroll": 17, "winner": 9, "cost": 3440000, "roi": 0.2238 },
+                { "city": "کرمانشاه", "cohort": 189, "enroll": 137, "winner": 60, "cost": 26950000, "roi": 0.2444 },
+                { "city": "مشهد", "cohort": 1741, "enroll": 601, "winner": 235, "cost": 69110000, "roi": 0.4574 },
+                { "city": "همدان", "cohort": 109, "enroll": 72, "winner": 42, "cost": 18470000, "roi": 0.3868 },
+                { "city": "یزد", "cohort": 134, "enroll": 89, "winner": 13, "cost": 5700000, "roi": 0.2968 }
+              ],
+              "recent": [
+                { "city": "اردبیل", "cohort": 13, "enroll": 3, "winner": 3, "cost": 990000, "roi": 0.1822 },
+                { "city": "ارومیه", "cohort": 30, "enroll": null, "winner": null, "cost": 0, "roi": null },
+                { "city": "اصفهان", "cohort": 115, "enroll": 15, "winner": 3, "cost": 770000, "roi": 0.4279 },
+                { "city": "اهواز", "cohort": 123, "enroll": 1, "winner": null, "cost": 0, "roi": null },
+                { "city": "تبریز", "cohort": 35, "enroll": null, "winner": null, "cost": 0, "roi": null },
+                { "city": "تهران", "cohort": 675, "enroll": 53, "winner": 34, "cost": 14590000, "roi": 0.1887 },
+                { "city": "رشت", "cohort": 20, "enroll": 1, "winner": 1, "cost": 200000, "roi": 0.1143 },
+                { "city": "زاهدان", "cohort": 14, "enroll": null, "winner": null, "cost": 0, "roi": null },
+                { "city": "شیراز", "cohort": 144, "enroll": 10, "winner": 3, "cost": 920000, "roi": 0.3743 },
+                { "city": "قم", "cohort": 47, "enroll": 1, "winner": 1, "cost": 260000, "roi": 0.2566 },
+                { "city": "کرج", "cohort": 185, "enroll": 15, "winner": 9, "cost": 2570000, "roi": 0.3497 },
+                { "city": "کرمان", "cohort": 34, "enroll": 5, "winner": 3, "cost": 820000, "roi": 0.2559 },
+                { "city": "کرمانشاه", "cohort": 20, "enroll": 6, "winner": null, "cost": 0, "roi": null },
+                { "city": "مشهد", "cohort": 362, "enroll": 32, "winner": 16, "cost": 5050000, "roi": 0.4354 },
+                { "city": "همدان", "cohort": 12, "enroll": 2, "winner": null, "cost": 0, "roi": null },
+                { "city": "یزد", "cohort": 70, "enroll": 11, "winner": 3, "cost": 1600000, "roi": 0.2123 }
+              ]
+            },
+            "31": {
+              "active": [
+                { "city": "ارومیه", "cohort": 78, "enroll": 34, "winner": 30, "cost": 6820000, "roi": 0.3254 },
+                { "city": "اهواز", "cohort": 548, "enroll": 239, "winner": 154, "cost": 34150000, "roi": 0.4457 },
+                { "city": "تهران", "cohort": 5214, "enroll": 1597, "winner": 649, "cost": 284670000, "roi": 0.2601 },
+                { "city": "زابل", "cohort": 8, "enroll": 5, "winner": 5, "cost": 900000, "roi": 0.4288 },
+                { "city": "زاهدان", "cohort": 46, "enroll": 18, "winner": 13, "cost": 3500000, "roi": 0.2972 },
+                { "city": "شیراز", "cohort": 500, "enroll": 168, "winner": 103, "cost": 17940000, "roi": 0.3817 },
+                { "city": "کرج", "cohort": 643, "enroll": 269, "winner": 196, "cost": 27810000, "roi": 0.3323 },
+                { "city": "مشهد", "cohort": 800, "enroll": 312, "winner": 183, "cost": 31800000, "roi": 0.4471 },
+                { "city": "یزد", "cohort": 82, "enroll": 22, "winner": 9, "cost": 1460000, "roi": 0.4243 }
+              ]
+            }
+          }
+        }
+      },
+      "alo": {
+        "dup": [{ "city": "تهران", "c1": 5170, "c2": 393 }],
+        "bikers": [{
+          "city": "تهران",
+          "d28_active": 8827, "d28_opb": 9, "d28_online": 16019, "d28_busy": 4315,
+          "r523_active": 5750, "r523_opb": 6, "r523_online": 15283, "r523_busy": 3797
+        }],
+        "react": {
+          "28": {
+            "Dormant 15-30": [
+              { "city": "تهران", "cohort": 5339, "enroll": 211, "cost": 27885000, "cpa": 132156.4 },
+              { "city": "مشهد", "cohort": 349, "enroll": 35, "cost": 4072000, "cpa": 116342.86 },
+              { "city": "شیراز", "cohort": 120, "enroll": 17, "cost": 1890000, "cpa": 111176.47 },
+              { "city": "کرج", "cohort": 56, "enroll": 5, "cost": 572000, "cpa": 114400 },
+              { "city": "اصفهان", "cohort": 54, "enroll": 5, "cost": 453000, "cpa": 90600 },
+              { "city": "قم", "cohort": 85, "enroll": 6, "cost": 630000, "cpa": 105000 },
+              { "city": "همدان", "cohort": 44, "enroll": 3, "cost": 630000, "cpa": 210000 },
+              { "city": "اهواز", "cohort": 38, "enroll": 3, "cost": 210000, "cpa": 70000 },
+              { "city": "تبریز", "cohort": 60, "enroll": 8, "cost": 786000, "cpa": 98250 }
+            ],
+            "Churn 30-60": [
+              { "city": "تهران", "cohort": 7346, "enroll": 123, "cost": 19476000, "cpa": 158341.46 },
+              { "city": "مشهد", "cohort": 444, "enroll": 14, "cost": 1592000, "cpa": 113714.29 },
+              { "city": "شیراز", "cohort": 399, "enroll": 16, "cost": 1775000, "cpa": 110937.5 },
+              { "city": "کرج", "cohort": 107, "enroll": 2, "cost": 230000, "cpa": 115000 },
+              { "city": "اصفهان", "cohort": 220, "enroll": 3, "cost": 486000, "cpa": 162000 },
+              { "city": "قم", "cohort": 98, "enroll": 9, "cost": 1380000, "cpa": 153333.33 },
+              { "city": "همدان", "cohort": 93, "enroll": 2, "cost": 460000, "cpa": 230000 },
+              { "city": "اهواز", "cohort": 169, "enroll": 3, "cost": 230000, "cpa": 76666.67 },
+              { "city": "تبریز", "cohort": 90, "enroll": 4, "cost": 736000, "cpa": 184000 }
+            ],
+            "Dead +60": [
+              { "city": "تهران", "cohort": 29196, "enroll": 138, "cost": 36240000, "cpa": 262608.7 },
+              { "city": "مشهد", "cohort": 3139, "enroll": 33, "cost": 4230000, "cpa": 128181.82 },
+              { "city": "شیراز", "cohort": 1986, "enroll": 24, "cost": 2966000, "cpa": 123583.33 },
+              { "city": "کرج", "cohort": 726, "enroll": 9, "cost": 750000, "cpa": 83333.33 },
+              { "city": "اصفهان", "cohort": 766, "enroll": 16, "cost": 1996000, "cpa": 124750 },
+              { "city": "تبریز", "cohort": 202, "enroll": 4, "cost": 400000, "cpa": 100000 },
+              { "city": "قم", "cohort": 159, "enroll": 1, "cost": 250000, "cpa": 250000 },
+              { "city": "همدان", "cohort": 57, "enroll": 1, "cost": 250000, "cpa": 250000 },
+              { "city": "اهواز", "cohort": 705, "enroll": 4, "cost": 0, "cpa": null }
+            ]
+          },
+          "31": {
+            "Recency 8-360": [
+              { "city": "اهواز", "cohort": 36, "enroll": 9, "cost": 1102000, "cpa": 122444.44 },
+              { "city": "اصفهان", "cohort": 101, "enroll": 67, "cost": 11584000, "cpa": 172895.52 },
+              { "city": "شیراز", "cohort": 133, "enroll": 62, "cost": 9422000, "cpa": 151967.74 }
+            ]
+          }
+        },
+        "act": {
+          "28": [
+            { "city": "تهران", "cohort": 10622, "winner": 342, "cost": 120550000, "roi": 0.08, "campaigns": 6 }
+          ],
+          "31": [
+            { "city": "اهواز", "cohort": 65, "winner": 5, "cost": 1620000, "roi": 0.50, "campaigns": 1 },
+            { "city": "شیراز", "cohort": 232, "winner": 29, "cost": 7922000, "roi": 0.70, "campaigns": 1 },
+            { "city": "مشهد", "cohort": 367, "winner": 97, "cost": 24420000, "roi": 0.52, "campaigns": 1 },
+            { "city": "اصفهان", "cohort": 162, "winner": 31, "cost": 8647000, "roi": 0.69, "campaigns": 1 },
+            { "city": "کرج", "cohort": 85, "winner": 15, "cost": 4476000, "roi": 0.54, "campaigns": 1 },
+            { "city": "تهران", "cohort": 12640, "winner": 598, "cost": 318950000, "roi": 0.48, "campaigns": 3 }
+          ]
+        }
+      }
+    };
+
+    const PINNED = ['تهران', 'مشهد'];
+    const toFa = s => { if (s === null || s === undefined) return null; return String(s).replace(/[0-9]/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]); };
+    const fmt = (v, d = 0) => { if (v === null || v === undefined || Number.isNaN(v)) return null; return toFa(Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: d })); };
+    const cell = (v, d = 0) => { const f = fmt(v, d); return f === null ? `<span class="dash">—</span>` : f; };
+    const pct = v => { if (v === null || v === undefined) return '<span class="dash">—</span>'; const sign = v >= 0 ? '+' : '−'; return toFa(sign + Math.abs(v * 100).toFixed(1)) + '٪'; };
+    const fmtRoi = v => { if (v === null || v === undefined) return '<span class="dash">—</span>'; return toFa((v * 100).toFixed(1)) + '٪'; };
+    const pinSort = rows => [...rows.filter(r => PINNED.includes(r.city)), ...rows.filter(r => !PINNED.includes(r.city))];
+    const sumCost = rows => rows.reduce((a, r) => a + (r.cost || 0), 0);
+
+    const SEG_META = {
+      'Dormant 15-30': { cls: 'seg-dormant', gloss: '' },
+      'Churn 30-60': { cls: 'seg-churn', gloss: '' },
+      'Dead +60': { cls: 'seg-deactive', gloss: '' },
+      'Recency 8-360': { cls: 'seg-recency', gloss: '' },
+    };
+    const DATE_LABEL = { '28': '۲۸ خرداد', '31': '۳۱ اردیبهشت' };
+
+    let state = { company: 'alo', sheet: 'dup' };
+    let actSub = { plus: 'daily', plusDate: '28', aloDate: '28' };
+    let reactDate = { alo: '28', plus: '28' };
+    let openSeg = {};
+
+    const SHEETS = [
+      { id: 'react', label: '🔄 کمپین‌های فعالسازی' },
+      { id: 'act', label: '🚀 کمپین‌های نگهداشت' },
+      { id: 'dup', label: ' سفیران در کمپین  های تکراری' },
+      { id: 'bikers', label: '👤 سفیران فعال' },
+    ];
+
+    function renderShell() {
+      const isPlus = state.company === 'plus';
+      document.getElementById('app').className = isPlus ? 'theme-plus' : 'theme-alo';
+      document.getElementById('switchEl').className = 'switch' + (isPlus ? ' is-plus' : '');
+      document.getElementById('btnAlo').classList.toggle('active', !isPlus);
+      document.getElementById('btnPlus').classList.toggle('active', isPlus);
+      const nav = document.getElementById('subnav');
+      nav.innerHTML = SHEETS.map(s =>
+        `<button data-sheet="${s.id}" class="${state.sheet === s.id ? 'active' : ''}">${s.label}</button>`
+      ).join('');
+      nav.querySelectorAll('button').forEach(b => b.onclick = () => { state.sheet = b.dataset.sheet; renderShell(); });
+      renderBody();
+    }
+
+    function renderBody() {
+      const c = state.company;
+      let html = '';
+      if (state.sheet === 'dup') html = renderDup(c);
+      else if (state.sheet === 'bikers') html = renderBikers(c);
+      else if (state.sheet === 'react') html = renderReact(c);
+      else if (state.sheet === 'act') html = c === 'plus' ? renderActPlus() : renderActAlo();
+      document.getElementById('content').innerHTML = `<div class="fade-in">${html}</div>`;
+      attachHandlers();
+      animateBars();
+    }
+
+    function animateBars() {
+      setTimeout(() => {
+        document.querySelectorAll('.bar-fill').forEach(el => { el.style.width = (el.getAttribute('data-w') || '0') + '%'; });
+      }, 50);
+    }
+
+    /* ── dup ── */
+    function renderDup(company) {
+      const rows = pinSort(DATA[company].dup);
+      const isPlus = company === 'plus';
+      const t1 = rows.reduce((a, r) => a + (r.c1 || 0), 0);
+      const t2 = rows.reduce((a, r) => a + (r.c2 || 0), 0);
+      const t3 = isPlus ? rows.reduce((a, r) => a + (r.c3 || 0), 0) : null;
+      return `
+      <div class="panel">
+        <div class="panel-head">
+          <div><h3>تکرار حضور سفیران در کمپین‌ها</h3><p>هر سفیر در چند کمپین حضور داشته</p></div>
+          <span class="tag">${toFa(rows.length)} شهر</span>
+        </div>
+        <div class="tbl-scroll"><table class="data">
+          <thead><tr>
+            <th>شهر</th><th>یک کمپین</th><th>دو کمپین</th>
+            ${isPlus ? '<th>سه کمپین و بیشتر</th><th>تنوع تارگت و ریوارد</th>' : ''}
+          </tr></thead>
+          <tbody>
+            ${rows.map(r => `
+              <tr class="${PINNED.includes(r.city) ? 'pinned-row' : ''}">
+                <td class="city">${r.city}</td>
+                <td>${cell(r.c1)}</td><td>${cell(r.c2)}</td>
+                ${isPlus ? `<td>${cell(r.c3)}</td><td>${cell(r.target)}</td>` : ''}
+              </tr>`).join('')}
+          </tbody>
+          <tfoot><tr style="background:var(--panel-2)">
+            <td class="city" style="font-weight:900">جمع کل</td>
+            <td style="font-weight:800">${cell(t1)}</td>
+            <td style="font-weight:800">${cell(t2)}</td>
+            ${isPlus ? `<td style="font-weight:800">${cell(t3)}</td><td></td>` : ''}
+          </tr></tfoot>
+        </table></div>
+      </div>`;
+    }
+
+    /* ── bikers ── */
+    const BIKER_METRICS = [
+      { key: 'active', label: 'سفیران فعال', dec: 0 },
+      { key: 'opb', label: 'OPB', dec: 0 },
+      { key: 'online', label: 'ساعت آنلاین', dec: 0 },
+      { key: 'busy', label: 'ساعت مشغولی', dec: 0 },
+    ];
+
+    function aggMetric(rows, key) {
+      if (key === 'opb') { const vals = rows.map(r => r[key]).filter(v => v !== null && v !== undefined); return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null; }
+      return rows.reduce((a, r) => a + (r[key] || 0), 0);
+    }
+
+    function renderGrowthSummary(rows) {
+      const metrics = [
+        { key: 'active', label: 'سفیران فعال', icon: '👤', dec: 0 },
+        { key: 'opb', label: 'OPB', icon: '📦', dec: 1 },
+        { key: 'online', label: 'ساعت آنلاین', icon: '🟢', dec: 0 },
+        { key: 'busy', label: 'ساعت مشغولی', icon: '⚡', dec: 0 },
+      ];
+      return `<div class="growth-summary">
+        ${metrics.map((m, i) => {
+        const now = aggMetric(rows.map(r => ({ [m.key]: r['d28_' + m.key] })), m.key);
+        const prev = aggMetric(rows.map(r => ({ [m.key]: r['r523_' + m.key] })), m.key);
+        const delta = (now !== null && prev && prev !== 0) ? (now - prev) / prev : null;
+        const isPos = delta !== null && delta >= 0;
+        const arrow = delta === null ? '' : isPos ? '▲' : '▼';
+        const pctStr = delta === null ? '—' : toFa(Math.abs(delta * 100).toFixed(1)) + '٪';
+        const nowFmt = now !== null ? toFa(Number(now).toLocaleString('en-US', { maximumFractionDigits: m.dec })) : '—';
+        const prFmt = prev !== null ? toFa(Number(prev).toLocaleString('en-US', { maximumFractionDigits: m.dec })) : '—';
+        return `
+            <div class="growth-card" style="animation-delay:${i * .1}s">
+              <div class="growth-icon">${m.icon}</div>
+              <div class="growth-label">${m.label}</div>
+              <div class="growth-delta ${delta === null ? 'pos' : isPos ? 'pos' : 'neg'}">
+                <span class="growth-arrow">${arrow}</span>${pctStr}
+              </div>
+              <div class="growth-now">${nowFmt}</div>
+              <div class="growth-prev">میانگین هفته: ${prFmt}</div>
+            </div>`;
+      }).join('')}
+      </div>`;
+    }
+
+    function renderBikers(company) {
+      const rows = pinSort(DATA[company].bikers);
+      const accent = company === 'alo' ? 'var(--blue)' : 'var(--yellow)';
+      return `
+      <div class="panel" style="margin-bottom:18px">
+        <div class="panel-head">
+          <div><h3>وضعیت رشد نسبت به میانگین یک هفته</h3><p>مقایسه‌ی <b>۲۸ خرداد</b> با میانگین روزانه‌ی <b>۲۳ تا ۲۷ خرداد</b></p></div>
+          <span class="tag">${toFa(rows.length)} شهر</span>
+        </div>
+        ${renderGrowthSummary(rows)}
+      </div>
+      <div class="panel">
+        <div class="panel-head"><div><h3>وضعیت تعداد سفیران، OPB، ساعت آنلاین و ساعت مشغولی</h3></div></div>
+        <div class="legend-row">
+          <span><span class="sw" style="background:${accent}"></span>۲۸ خرداد</span>
+          <span><span class="sw" style="background:var(--text-faint);opacity:.6"></span>میانگین ۲۳–۲۷ خرداد</span>
+        </div>
+        <div class="biker-grid">${rows.map(r => renderBikerCard(r)).join('')}</div>
+      </div>`;
+    }
+
+    function renderBikerCard(r) {
+      const isPinned = PINNED.includes(r.city);
+      return `
+      <div class="biker-card ${isPinned ? 'pinned' : ''}">
+        <div class="city"><span>${r.city}${isPinned ? ' ★' : ''}</span></div>
+        ${BIKER_METRICS.map(m => {
+        const now = r['d28_' + m.key];
+        const prev = r['r523_' + m.key];
+        const max = Math.max(now || 0, prev || 0, 0.0001);
+        const delta = (now !== null && prev) ? (now - prev) / prev : null;
+        const dcls = delta === null ? '' : delta >= 0 ? 'num-pos' : 'num-neg';
+        const nw = now ? (now / max * 100) : 0;
+        const pw = prev ? (prev / max * 100) : 0;
+        return `
+            <div class="metric">
+              <div class="metric-label"><span>${m.label}</span><span class="delta ${dcls}">${pct(delta)}</span></div>
+              <div class="bar-row"><div class="bar-track"><div class="bar-fill now" data-w="${nw}" style="width:0%"></div></div><span class="bar-val">${cell(now, m.dec)}</span></div>
+              <div class="bar-row" style="margin-top:4px"><div class="bar-track"><div class="bar-fill prev" data-w="${pw}" style="width:0%"></div></div><span class="bar-val">${cell(prev, m.dec)}</span></div>
+            </div>`;
+      }).join('')}
+      </div>`;
+    }
+
+    /* ── react ── */
+    function renderReact(company) {
+      const data = DATA[company].react;
+      const dates = Object.keys(data).filter(d => Object.keys(data[d]).length > 0);
+      const cur = reactDate[company] && data[reactDate[company]] ? reactDate[company] : dates[0];
+      reactDate[company] = cur;
+      const segTotal = sumCost(Object.values(data[cur]).flat());
+      return `
+      <div class="panel">
+        <div class="panel-head">
+          <div><h3>فعالسازی سفیران بر اساس سگمنت</h3><p>روی هر سگمنت کلیک کنید تا اطلاعات شهرهای آن باز شود</p></div>
+          <span class="tag">جمع کل هزینه: ${cell(segTotal)} تومان</span>
+        </div>
+        <div class="datebar">
+          ${dates.map(d => `<button class="datebtn ${d === cur ? 'active' : ''}" data-react-date="${d}">${DATE_LABEL[d]}</button>`).join('')}
+        </div>
+        <div class="accordion">
+          ${Object.keys(data[cur]).map(seg => renderAccordion(company, cur, seg, data[cur][seg])).join('')}
+        </div>
+      </div>`;
+    }
+
+    function renderAccordion(company, date, seg, rawRows) {
+      const rows = pinSort(rawRows);
+      const meta = SEG_META[seg] || { cls: 'seg-dormant', gloss: '' };
+      const key = `${company}-${date}-${seg}`;
+      const isOpen = !!openSeg[key];
+      const tC = rows.reduce((a, r) => a + (r.cohort || 0), 0);
+      const tE = rows.reduce((a, r) => a + (r.enroll || 0), 0);
+      const tCost = sumCost(rows);
+      return `
+      <div class="acc-item ${isOpen ? 'open' : ''}" data-seg-key="${key}">
+        <div class="acc-head" data-seg-toggle="${key}">
+          <div class="left"><span class="seg-chip ${meta.cls}">${seg}</span><span class="gloss">${meta.gloss}</span></div>
+          <div style="display:flex;align-items:center;gap:16px">
+            <span class="meta">${toFa(rows.length)} شهر · cohort ${fmt(tC)} · enroll ${fmt(tE)} · هزینه کل ${fmt(tCost)} تومان</span>
+            <span class="chev">▾</span>
+          </div>
+        </div>
+        <div class="acc-body" style="max-height:${isOpen ? '700px' : '0'}">
+          <div class="acc-body-inner">
+            <div class="tbl-scroll"><table class="data">
+              <thead><tr><th>شهر</th><th>Cohort Size</th><th>Enroll Size</th><th>Cost</th><th>CPA (تومان)</th></tr></thead>
+              <tbody>
+                ${rows.map(r => `
+                  <tr class="${PINNED.includes(r.city) ? 'pinned-row' : ''}">
+                    <td class="city">${r.city}</td>
+                    <td>${cell(r.cohort)}</td><td>${cell(r.enroll)}</td>
+                    <td>${cell(r.cost)}</td><td>${cell(r.cpa, 0)}</td>
+                  </tr>`).join('')}
+              </tbody>
+              <tfoot><tr style="background:var(--panel-2)">
+                <td class="city" style="font-weight:900">جمع کل</td>
+                <td style="font-weight:800">${cell(tC)}</td>
+                <td style="font-weight:800">${cell(tE)}</td>
+                <td style="font-weight:800">${cell(tCost)}</td>
+                <td></td>
+              </tr></tfoot>
+            </table></div>
+          </div>
+        </div>
+      </div>`;
+    }
+
+    /* ── act plus ── */
+    function renderActPlus() {
+      const act = DATA.plus.act;
+      const sub = actSub.plus;
+      return `
+      <div class="panel">
+        <div class="panel-head"><div><h3>نگهداشت سفیران — الوپیک پلاس</h3></div></div>
+        <div class="acttype">
+          <button class="daily ${sub === 'daily' ? 'active' : ''}" data-act-sub="daily">
+            <span class="t1">📅 روزانه</span><span class="t2">۲۸ خرداد · کمپین روزانه</span>
+          </button>
+          <button class="timeslot ${sub === 'timeslot' ? 'active' : ''}" data-act-sub="timeslot">
+            <span class="t1">⏱ تایم اسلاتی</span><span class="t2">۲۸ خرداد و ۳۱ اردیبهشت</span>
+          </button>
+        </div>
+        ${sub === 'daily' ? renderDailyTable(act.daily) : renderTimeslot(act.timeslot)}
+      </div>`;
+    }
+
+    function actTable(rows, empty = false) {
+      if (empty) return `<div class="empty-state">داده‌ای برای این بخش ثبت نشده است</div>`;
+      const tCohort = rows.reduce((a, r) => a + (r.cohort || 0), 0);
+      const tEnroll = rows.reduce((a, r) => a + (r.enroll || 0), 0);
+      const tWinner = rows.reduce((a, r) => a + (r.winner || 0), 0);
+      const tCost = sumCost(rows);
+      return `
+      <div class="tbl-scroll"><table class="data">
+        <thead><tr><th>شهر</th><th>Cohort</th><th>Enroll</th><th>Winner</th><th>Cost</th><th>ROI</th></tr></thead>
+        <tbody>
+          ${pinSort(rows).map(r => `
+            <tr class="${PINNED.includes(r.city) ? 'pinned-row' : ''}">
+              <td class="city">${r.city}</td>
+              <td>${cell(r.cohort)}</td><td>${cell(r.enroll)}</td>
+              <td>${cell(r.winner)}</td><td>${cell(r.cost)}</td>
+              <td>${fmtRoi(r.roi)}</td>
+            </tr>`).join('')}
+        </tbody>
+        <tfoot><tr style="background:var(--panel-2)">
+          <td class="city" style="font-weight:900">جمع کل</td>
+          <td style="font-weight:800">${cell(tCohort)}</td>
+          <td style="font-weight:800">${cell(tEnroll)}</td>
+          <td style="font-weight:800">${cell(tWinner)}</td>
+          <td style="font-weight:800">${cell(tCost)}</td>
+          <td></td>
+        </tr></tfoot>
+      </table></div>`;
+    }
+
+    function renderDailyTable(daily) {
+      return `
+      <div style="border:2px solid rgba(124,58,237,.25);border-radius:var(--r-md);padding:20px;background:var(--purple-glow)">
+        <div class="split-head">
+          <span class="sw" style="background:var(--purple)"></span>
+          روزانه — ۲۸ خرداد - Recency (1-30)
+          <span class="tag" style="margin-right:auto">${toFa(daily.rows.length)} شهر</span>
+        </div>
+        ${actTable(daily.rows)}
+      </div>`;
+    }
+
+    function renderTimeslot(timeslot) {
+      const dates = Object.keys(timeslot);
+      const cur = actSub.plusDate && timeslot[actSub.plusDate] ? actSub.plusDate : dates[0];
+      actSub.plusDate = cur;
+      const block = timeslot[cur];
+      return `
+      <div class="datebar">
+        ${dates.map(d => `<button class="datebtn ${d === cur ? 'active' : ''}" data-actdate="${d}">${DATE_LABEL[d]}</button>`).join('')}
+      </div>
+      <div style="border:2px solid rgba(5,150,105,.25);border-radius:var(--r-md);padding:20px;background:var(--green-glow)">
+        <div class="split-head"><span class="sw" style="background:var(--green)"></span>تایم اسلاتی — ${DATE_LABEL[cur]}</div>
+        <div class="split-tables">
+          <div>
+            <div class="split-head" style="font-size:13px;color:var(--text-dim)">
+              Active-Recency (1-7) <span class="tag">${toFa(block.active.length)} شهر</span>
+            </div>
+            ${actTable(block.active)}
+          </div>
+          <div>
+            <div class="split-head" style="font-size:13px;color:var(--text-dim)">
+              Recent Active-Recency (8-14)
+              ${block.recent ? `<span class="tag">${toFa(block.recent.length)} شهر</span>` : ''}
+            </div>
+            ${block.recent ? actTable(block.recent) : actTable(null, true)}
+          </div>
+        </div>
+      </div>`;
+    }
+
+    /* ── act alo ── */
+    function renderActAlo() {
+      const act = DATA.alo.act;
+      const dates = Object.keys(act);
+      const cur = act[actSub.aloDate] ? actSub.aloDate : dates[0];
+      actSub.aloDate = cur;
+      const rows = pinSort(act[cur].slice().sort((a, b) => b.cost - a.cost));
+      const tCohort = rows.reduce((a, r) => a + (r.cohort || 0), 0);
+      const tWinner = rows.reduce((a, r) => a + (r.winner || 0), 0);
+      const tCost = sumCost(rows);
+      return `
+      <div class="panel">
+        <div class="panel-head"><div><h3>نگهداشت سفیران — الوپیک</h3></div></div>
+        <div class="datebar">
+          ${dates.map(d => `<button class="datebtn ${d === cur ? 'active' : ''}" data-actdate-alo="${d}">${DATE_LABEL[d]}</button>`).join('')}
+        </div>
+        <div class="tbl-scroll"><table class="data">
+          <thead><tr><th>شهر</th><th>Cohort</th><th>Winner</th><th>Cost</th><th>ROI</th></tr></thead>
+          <tbody>
+            ${rows.map(r => `
+              <tr class="${PINNED.includes(r.city) ? 'pinned-row' : ''}">
+                <td class="city">${r.city}</td>
+                <td>${cell(r.cohort)}</td><td>${cell(r.winner)}</td>
+                <td>${cell(r.cost)}</td><td>${fmtRoi(r.roi)}</td>
+              </tr>`).join('')}
+          </tbody>
+          <tfoot><tr style="background:var(--panel-2)">
+            <td class="city" style="font-weight:900">جمع کل</td>
+            <td style="font-weight:800">${cell(tCohort)}</td>
+            <td style="font-weight:800">${cell(tWinner)}</td>
+            <td style="font-weight:800">${cell(tCost)}</td>
+            <td></td>
+          </tr></tfoot>
+        </table></div>
+      </div>`;
+    }
+
+    /* ── handlers ── */
+    function attachHandlers() {
+      const root = document.getElementById('content');
+      root.querySelectorAll('[data-react-date]').forEach(b => b.onclick = () => { reactDate[state.company] = b.dataset.reactDate; renderBody(); });
+      root.querySelectorAll('[data-seg-toggle]').forEach(b => b.onclick = () => { openSeg[b.dataset.segToggle] = !openSeg[b.dataset.segToggle]; renderBody(); });
+      root.querySelectorAll('[data-act-sub]').forEach(b => b.onclick = () => { actSub.plus = b.dataset.actSub; renderBody(); });
+      root.querySelectorAll('[data-actdate]').forEach(b => b.onclick = () => { actSub.plusDate = b.dataset.actdate; renderBody(); });
+      root.querySelectorAll('[data-actdate-alo]').forEach(b => b.onclick = () => { actSub.aloDate = b.dataset.actdateAlo; renderBody(); });
+    }
+
+    document.getElementById('btnAlo').onclick = () => { state.company = 'alo'; renderShell(); };
+    document.getElementById('btnPlus').onclick = () => { state.company = 'plus'; renderShell(); };
+    renderShell();
+  </script>
+</body>
+
+</html>
